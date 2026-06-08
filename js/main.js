@@ -181,14 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ----- Floating Card Animation on Home -----
-  const floatingCards = document.querySelectorAll('.floating-card');
-  if (floatingCards.length > 0) {
-    floatingCards.forEach((card, i) => {
-      card.style.animation = `float ${5 + i * 1.5}s ease-in-out ${i * 0.5}s infinite`;
-    });
-  }
-
   // ----- Page Transition Effect -----
   const internalLinks = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="mailto"]):not([href^="tel"])');
   internalLinks.forEach(link => {
