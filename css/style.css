@@ -1016,6 +1016,14 @@ section:has(.row-container) .container {
   line-height: 1.7;
 }
 
+.what-drives-us-card {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  min-height: auto;
+}
+
 /* ----- USP ----- */
 .usp-list {
   max-width: 800px;
@@ -1923,9 +1931,13 @@ section:has(.row-container) .container {
     overflow: visible;
   }
   .hero-right-container {
-    transform: scale(0.5);
-    margin: 0 auto;
-    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.6);
+    margin: 20px 0;
   }
 
   .works-grid {
@@ -2013,6 +2025,10 @@ section:has(.row-container) .container {
 
   .contact-form {
     padding: 28px;
+  }
+
+  .container {
+    padding: 0 20px;
   }
 }
 
