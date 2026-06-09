@@ -1906,6 +1906,8 @@ section:has(.row-container) .container {
   }
 
   .hero-stats {
+    flex-direction: column;
+    gap: 20px;
     align-items: flex-start;
     margin-top: 32px;
     padding-top: 20px;
@@ -1986,12 +1988,6 @@ section:has(.row-container) .container {
     text-align: center;
     padding: 18px 0;
     gap: 10px;
-  }
-
-  .hero-stats {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
   }
 
   .philosophy-grid {
