@@ -1877,6 +1877,15 @@ section:has(.row-container) .container {
     padding: 80px 0;
   }
 
+  .hero {
+    min-height: 90vh;
+    padding-top: calc(var(--nav-height) + 10px);
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
   .hero .container {
     text-align: left;
   }
@@ -1889,6 +1898,7 @@ section:has(.row-container) .container {
     margin-left: 0;
     border-left: 2px solid var(--neon-cobalt);
     padding-left: 20px;
+    font-size: 0.9rem;
   }
 
   .hero-actions {
@@ -1897,6 +1907,12 @@ section:has(.row-container) .container {
 
   .hero-stats {
     align-items: flex-start;
+    margin-top: 32px;
+    padding-top: 20px;
+  }
+
+  .hero-stat h3 {
+    font-size: 1.6rem;
   }
 
   .hero-visual {
