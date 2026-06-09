@@ -1,7 +1,3 @@
-/* ============================================
-   THE YOUTH MINT AGENCY - Main JavaScript
-   ============================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // ----- Navigation Toggle (Mobile) -----
@@ -15,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Close menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navToggle.classList.remove('active');
@@ -101,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
     statNumbers.forEach(el => statObserver.observe(el));
   }
 
-  // hero stat counter on home page
   const heroStats = document.querySelectorAll('.hero-stat h3 .count');
   if (heroStats.length > 0) {
     const heroStatObserver = new IntersectionObserver((entries) => {
@@ -155,6 +149,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  // ----- Floating Data Core Parallax (3D Perspective) -----
+  const heroCore = document.getElementById('hero-core');
+  if (heroCore && window.innerWidth > 768) {
+    heroCore.addEventListener('mouseenter', () => {
+      heroCore.style.transition = 'none';
+    });
+
+    heroCore.addEventListener('mousemove', (e) => {
+      const rect = heroCore.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const x = (e.clientX - centerX) / rect.width * 20;
+      const y = (e.clientY - centerY) / rect.height * 20;
+      heroCore.style.setProperty('--x', x);
+      heroCore.style.setProperty('--y', y);
+    });
+
+    heroCore.addEventListener('mouseleave', () => {
+      heroCore.style.transition = 'transform 0.6s ease';
+      heroCore.style.setProperty('--x', 0);
+      heroCore.style.setProperty('--y', 0);
+      setTimeout(() => {
+        heroCore.style.transition = 'none';
+      }, 600);
+    });
+  }
+
   // ----- Contact Form Handling -----
   const contactForm = document.querySelector('.contact-form form');
   if (contactForm) {
@@ -166,9 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
 
-      // Simulate form submission
       setTimeout(() => {
-        submitBtn.textContent = 'Message Sent! ✓';
+        submitBtn.textContent = 'Message Sent';
         submitBtn.style.background = 'linear-gradient(135deg, #059669, #047857)';
         contactForm.reset();
 
@@ -181,52 +201,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ----- Page Transition Effect -----
-  const internalLinks = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="mailto"]):not([href^="tel"])');
-  internalLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('http') && !href.startsWith('//') && !href.includes('#')) {
-      link.addEventListener('click', (e) => {
-        const transition = document.querySelector('.page-transition');
-        if (transition) {
-          e.preventDefault();
-          transition.classList.add('active');
-          setTimeout(() => {
-            window.location.href = href;
-          }, 300);
-        }
-      });
-    }
+  // ----- Lazy Background Image Loading -----
+  document.addEventListener('DOMContentLoaded', () => {
+    const bgElements = document.querySelectorAll('[data-bg]');
+    bgElements.forEach(el => {
+      const url = el.getAttribute('data-bg');
+      if (url) {
+        const img = new Image();
+        img.onload = () => {
+          el.style.backgroundImage = `url(${url})`;
+        };
+        img.src = url;
+      }
+    });
   });
 
-  // Add page transition element
-  const transitionDiv = document.createElement('div');
-  transitionDiv.className = 'page-transition';
-  document.body.appendChild(transitionDiv);
-
-  // Remove transition on page load
-  window.addEventListener('pageshow', () => {
-    const transition = document.querySelector('.page-transition');
-    if (transition) {
-      setTimeout(() => {
-        transition.classList.remove('active');
-      }, 100);
-    }
-  });
-
-});
-
-// ----- Lazy Background Image Loading -----
-document.addEventListener('DOMContentLoaded', () => {
-  const bgElements = document.querySelectorAll('[data-bg]');
-  bgElements.forEach(el => {
-    const url = el.getAttribute('data-bg');
-    if (url) {
-      const img = new Image();
-      img.onload = () => {
-        el.style.backgroundImage = `url(${url})`;
-      };
-      img.src = url;
-    }
-  });
 });
